@@ -1,8 +1,7 @@
 const {identify, reporting, ota} = require('zigbee-herdsman-converters/lib/modernExtend');
 
 const definition = {
-    fingerprint: [{modelID: 'TS0601', manufacturerName: '_TZE200_edl8pz1k'},
-                  {modelID: 'TS0601', manufacturerName: '_TZE204_u9bfwha0'},
+    fingerprint: [{modelID: 'TS0601', manufacturerName: '_TZE204_u9bfwha0'},
                   {modelID: 'TS0601', manufacturerName: '_TZE204_aoclfnxz'},
                   {modelID: 'TS0601', manufacturerName: '_TZE204_edl8pz1k'},
                   {modelID: 'TS0601', manufacturerName: '_TZE204_tagezcph'},
