@@ -33,6 +33,8 @@
 	- ["_TZE284_xalsoe3m"](doc/thermostats/tuya_thermostat_r0a/README.md)
 10. Model r0B
 	- ["_TZE204_8byfmxdv"](doc/thermostats/tuya_thermostat_r0b/README.md)
+11. Model r0C
+	- ["_TZE204_szbxmorb"](doc/thermostats/tuya_thermostat_r0c/README.md)
 
 <img src="doc/images/model1.png"/>
 <img src="doc/images/model1_2.png"/>
@@ -292,6 +294,9 @@ Thanks :))))
 	- Added thermostat with signature `_TZE204_8byfmxdv`.
 	- Modified `Factory Reset` procedure.
 	- Added the ability to change the thermostat's `ZigBee model` via the `mqtt` topic.
+- 1.0.20
+	- Added thermostat with signature `_TZE204_szbxmorb`.
+	- Fixed a bug with the schedule divider.
 	
 [Top](#Top)
 
