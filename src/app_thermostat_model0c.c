@@ -287,7 +287,7 @@ void local_cmd_humidity_0C(void *args) {
 
     zcl_setAttrVal(APP_ENDPOINT1, ZCL_CLUSTER_MS_RELATIVE_HUMIDITY, ZCL_RELATIVE_HUMIDITY_MEASUREMENT_ATTRID_MEASUREDVALUE, (uint8_t*)hum);
 
-#if UART_PRINTF_MODE //&& DEBUG_CMD
+#if UART_PRINTF_MODE && DEBUG_CMD
             printf("Local Humidity: %d\r\n", *hum);
 #endif
 
