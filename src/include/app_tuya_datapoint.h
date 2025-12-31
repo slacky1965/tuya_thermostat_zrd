@@ -324,6 +324,41 @@ typedef enum {
     DP_TYPE0B_ID_65    = 0x65,     // hysteresis 0.5° ... 5°C step 0.5 *10
 } data_point_id_type0B_t;
 
+/* data point for manufacturer id -
+ * "szbxmorb"
+ *
+ * type0C (model0C)
+*/
+typedef enum {
+    DP_TYPE0C_ID_00    = 0x00,     // 0 - not support
+    DP_TYPE0C_ID_01    = 0x01,     // on off
+    DP_TYPE0C_ID_02    = 0x02,     // manual / programming
+    DP_TYPE0C_ID_04    = 0x04,     // eco mode
+    DP_TYPE0C_ID_10    = 0x10,     // heat setpoint
+    DP_TYPE0C_ID_13    = 0x13,     // max heat 20°C ... 45°C step 1
+    DP_TYPE0C_ID_18    = 0x18,     // local temperature
+    DP_TYPE0C_ID_1A    = 0x1A,     // min heat 5°C ... 20°C step 1
+    DP_TYPE0C_ID_1B    = 0x1B,     // calibration -12°C ... +12°C step 1
+    DP_TYPE0C_ID_24    = 0x24,     // 0x00 - heat, 0x01 - idle
+    DP_TYPE0C_ID_28    = 0x28,     // lock / unlock keys
+    DP_TYPE0C_ID_65    = 0x65,     // humidity offset -95 ... 95 step 5
+    DP_TYPE0C_ID_66    = 0x66,     // Sensor IN - 0/AL - 1/OU - 2
+    DP_TYPE0C_ID_67    = 0x67,     // hysteresis 1°C ... 5°C step 1
+    DP_TYPE0C_ID_68    = 0x68,     // humidity
+    DP_TYPE0C_ID_69    = 0x69,     // eco mode's set temperature 0 ... 30°C step 1
+    DP_TYPE0C_ID_6A    = 0x6A,     // schedule sun
+    DP_TYPE0C_ID_6B    = 0x6B,     // schedule sat
+    DP_TYPE0C_ID_6C    = 0x6C,     // schedule fri
+    DP_TYPE0C_ID_6D    = 0x6D,     // schedule thu
+    DP_TYPE0C_ID_6E    = 0x6E,     // schedule wed
+    DP_TYPE0C_ID_6F    = 0x6F,     // schedule tue
+    DP_TYPE0C_ID_70    = 0x70,     // schedule mon
+    DP_TYPE0C_ID_71    = 0x71,     // temperature of outer sensor (if AL or OU)
+    DP_TYPE0C_ID_73    = 0x73,     // level brightness of screen 0 ... 9 step 1
+    DP_TYPE0C_ID_74    = 0x74,     // protection max temperature +20°C ... +70°C step 1
+    DP_TYPE0C_ID_75    = 0x75,     // protection min temperature 0°C ... +10°C step 1
+} data_point_id_type0C_t;
+
 typedef enum {
     SCHEDULE8_MON = 0,
     SCHEDULE8_SAT,
@@ -342,6 +377,7 @@ typedef enum {
     MANUF_NAME_9,
     MANUF_NAME_0A,
     MANUF_NAME_0B,
+    MANUF_NAME_0C,
     MANUF_NAME_MAX
 } manuf_name_t;
 
@@ -382,7 +418,9 @@ typedef enum {
     DP_IDX_FAN_CONTROL,         // 33
     DP_IDX_EXT_CALIBRATION,     // 34
     DP_IDX_MODE_LOCK,           // 35
-    DP_IDX_MAXNUM               // 36
+    DP_IDX_HUMIDITY,            // 36
+    DP_IDX_HUMIDITY_OFFSET,     // 37
+    DP_IDX_MAXNUM               // 38
 } data_point_idx_t;
 
 /* Data Point

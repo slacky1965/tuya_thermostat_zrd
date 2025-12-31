@@ -330,6 +330,19 @@ static void app_zclWriteReqCmd(uint8_t endPoint, uint16_t clusterId, zclWriteCmd
         }
 
     }
+
+    if (clusterId == ZCL_CLUSTER_MS_RELATIVE_HUMIDITY) {
+        for(uint8_t i = 0; i < numAttr; i++) {
+            if (attr[i].attrID == ZCL_RELATIVE_HUMIDITY_MEASUREMENT_ATTRID_CUSTOM_HUMIDITY_OFFSET) {
+                int16_t hum_offset = attr[i].attrData[0] & 0xff;
+                hum_offset |= (attr[i].attrData[1] << 8) & 0xffff;
+//                printf("Humidity offset: %d\r\n", hum_offset);
+                if (data_point_model[DP_IDX_HUMIDITY_OFFSET].remote_cmd)
+                    data_point_model[DP_IDX_HUMIDITY_OFFSET].remote_cmd(&hum_offset);
+            }
+        }
+    }
+
 #ifdef ZCL_POLL_CTRL
 	if(clusterId == ZCL_CLUSTER_GEN_POLL_CONTROL){
 		for(int32_t i = 0; i < numAttr; i++){
@@ -1207,6 +1220,7 @@ status_t app_thermostatCb(zclIncomingAddrInfo_t *pAddrInfo, uint8_t cmdId, void 
                     case MANUF_NAME_5:
                     case MANUF_NAME_7:
                     case MANUF_NAME_9:
+                    case MANUF_NAME_0C:
                         for (uint8_t i = 0; i < cmd->numOfTransForSequence; i++) {
                             if (i == 4) {
                                 break;
@@ -1465,6 +1479,24 @@ status_t app_displayLevelCb(zclIncomingAddrInfo_t *pAddrInfo, u8 cmdId, void *cm
                 break;
         }
     }
+
+    return ZCL_STA_SUCCESS;
+}
+
+/*********************************************************************
+ * @fn      app_humidityCb
+ *
+ * @brief   Handler for ZCL Humidity command.
+ *
+ * @param   pAddrInfo
+ * @param   cmdId
+ * @param   cmdPayload
+ *
+ * @return  status_t
+ */
+status_t app_humidityCb(zclIncomingAddrInfo_t *pAddrInfo, uint8_t cmdId, void *cmdPayload) {
+
+//    printf("app_humidityCb. cmd: 0x%x\r\n", cmdId);
 
     return ZCL_STA_SUCCESS;
 }

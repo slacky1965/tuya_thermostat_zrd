@@ -9,6 +9,7 @@ $(OUT_PATH)/$(SRC_PATH)/common/main.o \
 $(OUT_PATH)/$(SRC_PATH)/zcl/zcl_thermostat_ui_cfg.o \
 $(OUT_PATH)/$(SRC_PATH)/zcl/zcl_app_thermostat.o \
 $(OUT_PATH)/$(SRC_PATH)/zcl/zcl_app_fancontrol.o \
+$(OUT_PATH)/$(SRC_PATH)/zcl/zcl_relative_humidity_measurement.o \
 $(OUT_PATH)/$(SRC_PATH)/zcl/zcl_reporting.o \
 $(OUT_PATH)/$(SRC_PATH)/app_tuya_datapoint.o \
 $(OUT_PATH)/$(SRC_PATH)/app_uart_tuya.o \
@@ -25,6 +26,7 @@ $(OUT_PATH)/$(SRC_PATH)/app_thermostat_model8.o \
 $(OUT_PATH)/$(SRC_PATH)/app_thermostat_model9.o \
 $(OUT_PATH)/$(SRC_PATH)/app_thermostat_model0a.o \
 $(OUT_PATH)/$(SRC_PATH)/app_thermostat_model0b.o \
+$(OUT_PATH)/$(SRC_PATH)/app_thermostat_model0c.o \
 $(OUT_PATH)/$(SRC_PATH)/app_endpoint_cfg.o \
 $(OUT_PATH)/$(SRC_PATH)/app_utility.o \
 $(OUT_PATH)/$(SRC_PATH)/app_time.o \
