@@ -204,6 +204,7 @@ extern "C" {
 #if TOUCHLINK_SUPPORT
 #define ZCL_ZLL_COMMISSIONING_SUPPORT               ON
 #endif
+#define ZCL_HUMIDITY_MEASUREMENT_SUPPORT            ON
 
 
 

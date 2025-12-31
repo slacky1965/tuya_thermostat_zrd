@@ -58,6 +58,7 @@ const uint16_t app_ep1_inClusterList[] = {
 #ifdef ZCL_FANCONTROL
     ZCL_CLUSTER_HAVC_FAN_CONTROL,
 #endif
+    ZCL_CLUSTER_MS_RELATIVE_HUMIDITY,
 };
 
 /**
@@ -263,6 +264,25 @@ const zclAttrInfo_t time_attrTbl[] =
 
 #define ZCL_TIME_ATTR_NUM    sizeof(time_attrTbl) / sizeof(zclAttrInfo_t)
 
+zcl_humidityAttr_t g_zcl_humidityAttrs = {
+        .value = 0xffff,    /* humidity unknown  */
+        .minValue = 0x0000,
+        .maxValue = 0x2710, /* 100.00              */
+        .humidity_offset = 0,
+};
+
+
+const zclAttrInfo_t humidity_attrTbl[] = {
+        { ZCL_RELATIVE_HUMIDITY_MEASUREMENT_ATTRID_MEASUREDVALUE,       ZCL_UINT16,     RR,     (uint8_t*)&g_zcl_humidityAttrs.value            },
+        { ZCL_RELATIVE_HUMIDITY_MEASUREMENT_ATTRID_MINMEASUREDVALUE,    ZCL_UINT16,     R,      (uint8_t*)&g_zcl_humidityAttrs.minValue         },
+        { ZCL_RELATIVE_HUMIDITY_MEASUREMENT_ATTRID_MAXMEASUREDVALUE,    ZCL_UINT16,     R,      (uint8_t*)&g_zcl_humidityAttrs.maxValue         },
+        { ZCL_RELATIVE_HUMIDITY_MEASUREMENT_ATTRID_CUSTOM_HUMIDITY_OFFSET, ZCL_INT16,   RWR,    (uint8_t*)&g_zcl_humidityAttrs.humidity_offset  },
+
+        { ZCL_ATTRID_GLOBAL_CLUSTER_REVISION,                           ZCL_UINT16,     R,      (uint8_t*)&zcl_attr_global_clusterRevision      },
+};
+
+#define ZCL_HUMIDITY_ATTR_NUM   sizeof(humidity_attrTbl) / sizeof(zclAttrInfo_t)
+
 
 #ifdef ZCL_THERMOSTAT
 
@@ -393,6 +413,7 @@ const zcl_specClusterInfo_t g_appEp1ClusterList[] = {
 #ifdef ZCL_FANCONTROL
     {ZCL_CLUSTER_HAVC_FAN_CONTROL, MANUFACTURER_CODE_NONE, ZCL_FANCONTROL_ATTR_NUM, fancontrol_attrTbl, zcl_fancontrol_register, app_fancontrolCb},
 #endif
+    {ZCL_CLUSTER_MS_RELATIVE_HUMIDITY,  MANUFACTURER_CODE_NONE, ZCL_HUMIDITY_ATTR_NUM,  humidity_attrTbl,   zcl_humidity_measurement_register,  app_humidityCb},
 };
 
 uint8_t APP_EP1_CB_CLUSTER_NUM = (sizeof(g_appEp1ClusterList)/sizeof(g_appEp1ClusterList[0]));
@@ -478,6 +499,9 @@ static void print_setting_sr(nv_sts_t st, thermostat_settings_t *thermostat_sett
             case MANUF_NAME_3:
             case MANUF_NAME_4:
             case MANUF_NAME_5:
+            case MANUF_NAME_7:
+            case MANUF_NAME_9:
+            case MANUF_NAME_0C:
                 for(i = 0; i < 4; i++) {
                     printf("schedule_mon[%d]. transTime: 0x%x, heatSetpoint: 0x%x\r\n", i,
                             thermostat_settings->schedule_data.schedule_mon[i].transTime,
@@ -557,6 +581,7 @@ static void print_setting_sr(nv_sts_t st, thermostat_settings_t *thermostat_sett
     printf("level:                       %d\r\n", thermostat_settings->level);
     printf("dev_therm_mode:              %d\r\n", thermostat_settings->dev_therm_mode);
     printf("extTemperatureCalibration:   %d\r\n", thermostat_settings->extTemperatureCalibration);
+    printf("humidity_offset:             %d\r\n", thermostat_settings->humidity_offset);
 #endif
 }
 
@@ -744,6 +769,12 @@ nv_sts_t thermostat_settings_save() {
 //            printf("fanControl changed: 0x%x\r\n", thermostat_settings.fanControl);
         }
 
+        if (thermostat_settings.humidity_offset != g_zcl_humidityAttrs.humidity_offset) {
+            thermostat_settings.humidity_offset = g_zcl_humidityAttrs.humidity_offset;
+            save = true;
+//            printf("humidity_offset changed: 0x%x\r\n", thermostat_settings.humidity_offset);
+        }
+
         if (save) {
 
 #if UART_PRINTF_MODE
@@ -790,6 +821,7 @@ nv_sts_t thermostat_settings_save() {
         thermostat_settings.dev_therm_mode = dev_therm_mode;
         thermostat_settings.fanMode = g_zcl_fancontrolAttrs.fanMode;
         thermostat_settings.fanControl = g_zcl_fancontrolAttrs.fanControl;
+        thermostat_settings.humidity_offset = g_zcl_humidityAttrs.humidity_offset;
         thermostat_settings.crc = checksum((uint8_t*)&thermostat_settings, sizeof(thermostat_settings_t)-1);
 
         st = nv_flashWriteNew(1, NV_MODULE_APP,  NV_ITEM_APP_USER_CFG, sizeof(thermostat_settings_t), (uint8_t*)&thermostat_settings);
@@ -852,6 +884,8 @@ nv_sts_t thermostat_settings_restore() {
 
         g_zcl_levelAttrs.currentLevelA = thermostat_settings.currentLevelA;
         g_zcl_levelAttrs.currentLevelB = thermostat_settings.currentLevelB;
+
+        g_zcl_humidityAttrs.humidity_offset = thermostat_settings.humidity_offset;
 
 #if UART_PRINTF_MODE && DEBUG_SAVE
         print_setting_sr(st, &thermostat_settings, false);

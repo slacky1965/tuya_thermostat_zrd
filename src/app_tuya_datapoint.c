@@ -50,6 +50,10 @@ static const char8_t *tuya_manuf_name0B[] = {
                                            "8byfmxdv",
                                             NULL};
 
+static const char8_t *tuya_manuf_name0C[] = {
+                                           "szbxmorb",
+                                            NULL};
+
 const char8_t **tuya_manuf_names[] = {
                                       tuya_manuf_name1,
                                       tuya_manuf_name2,
@@ -61,7 +65,8 @@ const char8_t **tuya_manuf_names[] = {
                                       tuya_manuf_name8,
                                       tuya_manuf_name9,
                                       tuya_manuf_name0A,
-                                      tuya_manuf_name0B
+                                      tuya_manuf_name0B,
+                                      tuya_manuf_name0C
 };
 
 uint8_t manuf_name = MANUF_NAME_1;

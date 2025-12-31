@@ -57,6 +57,7 @@ void (*answer_weekly_schedule[MANUF_NAME_MAX])(void *args) = {
    remote_cmd_get_schedule_9,
    remote_cmd_get_schedule_0A,
    remote_cmd_get_schedule_0B,
+   remote_cmd_get_schedule_0C,
 };
 
 /*

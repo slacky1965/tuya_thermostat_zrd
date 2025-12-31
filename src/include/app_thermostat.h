@@ -79,6 +79,7 @@ typedef struct __attribute__((packed)) {
     uint8_t     fanControl;
     uint8_t     extTemperatureCalibration;
     uint8_t     manuf_name;
+    int16_t     humidity_offset;
     uint8_t     crc;
 } thermostat_settings_t;
 
@@ -153,6 +154,7 @@ data_point_st_t *init_datapoint_model8();
 data_point_st_t *init_datapoint_model9();
 data_point_st_t *init_datapoint_model0A();
 data_point_st_t *init_datapoint_model0B();
+data_point_st_t *init_datapoint_model0C();
 
 void remote_cmd_sys_mode(void *args);
 void remote_cmd_heating_set(void *args);
@@ -418,6 +420,33 @@ void remote_cmd_set_schedule_0A(void *args);
 
 void remote_cmd_level_0B(void *args);
 void remote_cmd_set_schedule_0B(void *args);
+
+/*
+ *  remote_cmd for signarure
+ *  "szbxmorb"
+ *
+ *  model0C - name_0C
+ */
+#define remote_cmd_sys_mode_0C          remote_cmd_sys_mode
+#define remote_cmd_heating_set_0C       remote_cmd_heating_set
+#define remote_cmd_temp_calibration_0C  remote_cmd_temp_calibration
+#define remote_cmd_sensor_used_0C       remote_cmd_sensor_used
+#define remote_cmd_keylock_0C           remote_cmd_keylock
+#define remote_cmd_deadband_0C          remote_cmd_deadband
+#define remote_cmd_min_setpoint_0C      remote_cmd_min_setpoint
+#define remote_cmd_max_setpoint_0C      remote_cmd_max_setpoint
+#define remote_cmd_oper_mode_0C         remote_cmd_oper_mode_2
+#define remote_cmd_frost_protect_0C     remote_cmd_frost_protect_2
+#define remote_cmd_heat_protect_0C      remote_cmd_heat_protect_2
+#define remote_cmd_set_schedule_0C      remote_cmd_set_schedule_2
+#define remote_cmd_get_schedule_0C      remote_cmd_get_schedule_2
+#define remote_cmd_eco_mode_0C          remote_cmd_eco_mode_3
+#define remote_cmd_eco_mode_temp_0C     remote_cmd_eco_mode_temp_3
+#define remote_cmd_level_0C             remote_cmd_level_4
+
+void remote_cmd_humidity_0C(void *args);
+void remote_cmd_humidity_offset_0C(void *args);
+
 
 /*
  * common functions local_cmd
@@ -705,5 +734,34 @@ void local_cmd_set_schedule_0A(void *args);
 #define local_cmd_level_0B              local_cmd_level_6
 
 void local_cmd_set_schedule_0B(void *args);
+
+/*
+ *  local_cmd for signarure
+ *  "szbxmorb"
+ *
+ *  model0C - name_0C
+ */
+#define local_cmd_inner_sensor_0C       local_cmd_inner_sensor
+#define local_cmd_heating_set_0C        local_cmd_heating_set
+#define local_cmd_temp_calibration_0C   local_cmd_temp_calibration
+#define local_cmd_min_setpoint_0C       local_cmd_min_setpoint
+#define local_cmd_max_setpoint_0C       local_cmd_max_setpoint
+#define local_cmd_deadband_0C           local_cmd_deadband
+#define local_cmd_keylock_0C            local_cmd_keylock
+#define local_cmd_sensor_used_0C        local_cmd_sensor_used
+#define local_cmd_set_run_state_0C      local_cmd_set_run_state
+#define local_cmd_onoff_state_0C        local_cmd_onoff_state
+#define local_cmd_oper_mode_0C          local_cmd_oper_mode_2
+#define local_cmd_frost_protect_0C      local_cmd_frost_protect_2
+#define local_cmd_heat_protect_0C       local_cmd_heat_protect_2
+#define local_cmd_outdoor_sensor_0C     local_cmd_outdoor_sensor_2
+#define local_cmd_set_schedule_0C       local_cmd_set_schedule_2
+#define local_cmd_eco_mode_0C           local_cmd_eco_mode_3
+#define local_cmd_eco_mode_temp_0C      local_cmd_eco_mode_temp_3
+#define local_cmd_level_0C              local_cmd_level_day_3
+
+void local_cmd_humidity_0C(void *args);
+void local_cmd_humidity_offset_0C(void *args);
+
 
 #endif /* SRC_INCLUDE_APP_THERMOSTAT_H_ */

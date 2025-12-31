@@ -7,16 +7,17 @@
 #include "ota.h"
 #include "gp.h"
 
+#include "zcl_relative_humidity_measurement.h"
+#include "zcl_app_thermostat.h"
+#include "zcl_thermostat_ui_cfg.h"
+#include "zcl_app_fancontrol.h"
 
 #include "app_utility.h"
 #include "app_uart_tuya.h"
 #include "app_tuya_datapoint.h"
 #include "app_endpoint_cfg.h"
 #include "app_uart.h"
-#include "zcl_app_thermostat.h"
 #include "app_thermostat.h"
-#include "zcl_thermostat_ui_cfg.h"
-#include "zcl_app_fancontrol.h"
 #include "app_time.h"
 #include "app_bootloader.h"
 
@@ -65,6 +66,7 @@ status_t app_thermostat_uicCb(zclIncomingAddrInfo_t *pAddrInfo, uint8_t cmdId, v
 status_t app_fancontrolCb(zclIncomingAddrInfo_t *pAddrInfo, uint8_t cmdId, void *cmdPayload);
 status_t app_timeCb(zclIncomingAddrInfo_t *pAddrInfo, uint8_t cmdId, void *cmdPayload);
 status_t app_displayLevelCb(zclIncomingAddrInfo_t *pAddrInfo, u8 cmdId, void *cmdPayload);
+status_t app_humidityCb(zclIncomingAddrInfo_t *pAddrInfo, uint8_t cmdId, void *cmdPayload);
 
 #define zcl_scene1AttrGet()         &g_zcl_scene1Attrs
 #define zcl_scene2AttrGet()         &g_zcl_scene2Attrs

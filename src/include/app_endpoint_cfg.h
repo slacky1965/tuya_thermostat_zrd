@@ -73,6 +73,16 @@ typedef struct {
 } zcl_levelAttr_t;
 
 /**
+ *  @brief Defined for humidity cluster attributes
+ */
+typedef struct {
+    uint16_t    value;
+    uint16_t    minValue;
+    uint16_t    maxValue;
+    int16_t     humidity_offset;                // -95 <-> +95 * 100
+} zcl_humidityAttr_t;
+
+/**
  *  @brief Defined for Thermostat and HVAC UI CFG clusters attributes
  */
 typedef struct {
@@ -130,7 +140,7 @@ extern zcl_groupAttr_t g_zcl_group1Attrs;
 extern zcl_sceneAttr_t g_zcl_scene1Attrs;
 extern zcl_thermostatAttr_t g_zcl_thermostatAttrs;
 extern zcl_levelAttr_t g_zcl_levelAttrs;
-
+extern zcl_humidityAttr_t g_zcl_humidityAttrs;
 /*
  *
  * Save and restore settings

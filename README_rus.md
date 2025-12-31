@@ -30,6 +30,8 @@
 	- ["_TZE284_xalsoe3m"](doc/thermostats/tuya_thermostat_r0a/README.md)
 10. Model r0B
 	- ["_TZE204_8byfmxdv"](doc/thermostats/tuya_thermostat_r0b/README.md)
+11. Model r0C
+	- ["_TZE204_szbxmorb"](doc/thermostats/tuya_thermostat_r0c/README.md)
 
 <img src="doc/images/model1.png"/>
 <img src="doc/images/model1_2.png"/>
@@ -291,6 +293,9 @@ P.S. В реальной работе не проверялось, требуе�
 	- Добавлен термостат с сигнатурой `_TZE204_8byfmxdv`
 	- Измененая процедура `Factory Reset`.
 	- Добавлена возможность менять `Zigbee model` термостата через топик `mqtt`.
+- 1.0.20
+	- Добавлен термостат `_TZE204_szbxmorb`
+	- Устранена ошибка с делителем для расписания.
 	
 
 [Наверх](#Top)

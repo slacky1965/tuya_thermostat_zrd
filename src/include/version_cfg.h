@@ -43,7 +43,7 @@
 
 #define APP_RELEASE                         0x10        //app release 1.0
 #ifndef VERSION_BUILD
-    #define APP_BUILD                       0x19        //app build 18, full version - v1.0.19
+    #define APP_BUILD                       0x20        //app build 20, full version - v1.0.20
 #endif
 
 #define STACK_RELEASE                       0x30        //stack release 3.0
