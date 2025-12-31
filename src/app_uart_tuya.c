@@ -579,6 +579,7 @@ void uart_cmd_handler() {
                                         case MANUF_NAME_0C:
                                             data_point_model = init_datapoint_model0C();
                                             uart_timeout = TIMEOUT_20SEC;
+                                            set_command(COMMAND28, seq_num, true);
                                             zb_modelId[18] = '0';
                                             zb_modelId[19] = 'C';
                                             break;
