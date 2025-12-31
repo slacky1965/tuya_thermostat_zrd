@@ -598,79 +598,6 @@ void uart_cmd_handler() {
 
                                     zcl_setAttrVal(APP_ENDPOINT1, ZCL_CLUSTER_GEN_BASIC, ZCL_ATTRID_BASIC_MODEL_ID, zb_modelId);
 
-
-//                                    switch(manuf_name) {
-//                                        case MANUF_NAME_2:
-//                                            if (check_answerMcuTimerEvt) {
-//                                                TL_ZB_TIMER_CANCEL(&check_answerMcuTimerEvt);
-//                                            }
-//                                            uart_timeout = TIMEOUT_8SEC;
-//                                            check_answerMcuTimerEvt = TL_ZB_TIMER_SCHEDULE(check_answerMcuCb, NULL, uart_timeout);
-//                                            break;
-//                                        case MANUF_NAME_3:
-//                                        case MANUF_NAME_4:
-//                                        case MANUF_NAME_0B:
-//                                            if (check_answerMcuTimerEvt) {
-//                                                TL_ZB_TIMER_CANCEL(&check_answerMcuTimerEvt);
-//                                            }
-//                                            uart_timeout = TIMEOUT_15SEC;
-//                                            check_answerMcuTimerEvt = TL_ZB_TIMER_SCHEDULE(check_answerMcuCb, NULL, uart_timeout);
-//                                            if (manuf_name == MANUF_NAME_0B) {
-//                                                set_command(COMMAND28, seq_num, true);
-//                                            }
-//                                            break;
-//                                        case MANUF_NAME_5:
-//                                        case MANUF_NAME_6:
-//                                        case MANUF_NAME_0A:
-//                                            set_command(COMMAND28, seq_num, true);
-//                                            if (manuf_name == MANUF_NAME_5 || manuf_name == MANUF_NAME_0A) {
-//                                                if (check_answerMcuTimerEvt) {
-//                                                    TL_ZB_TIMER_CANCEL(&check_answerMcuTimerEvt);
-//                                                }
-//                                                uart_timeout = TIMEOUT_1MIN30SEC;
-//                                                check_answerMcuTimerEvt = TL_ZB_TIMER_SCHEDULE(check_answerMcuCb, NULL, uart_timeout);
-//                                            }
-//                                            if (manuf_name == MANUF_NAME_6) {
-//                                                if (check_answerMcuTimerEvt) {
-//                                                    TL_ZB_TIMER_CANCEL(&check_answerMcuTimerEvt);
-//                                                }
-//                                                uart_timeout = TIMEOUT_30SEC;
-//                                                check_answerMcuTimerEvt = TL_ZB_TIMER_SCHEDULE(check_answerMcuCb, NULL, uart_timeout);
-//                                            }
-//                                            break;
-//                                        case MANUF_NAME_7:
-//                                            if (check_answerMcuTimerEvt) {
-//                                                TL_ZB_TIMER_CANCEL(&check_answerMcuTimerEvt);
-//                                            }
-//                                            uart_timeout = TIMEOUT_25SEC;
-//                                            check_answerMcuTimerEvt = TL_ZB_TIMER_SCHEDULE(check_answerMcuCb, NULL, uart_timeout);
-//                                            break;
-//                                        case MANUF_NAME_8:
-//                                            //int16_t  minHeatSet = 500;
-//                                            //int16_t  maxHeatSet = 9900;
-//                                            //
-//                                            //zcl_setAttrVal(APP_ENDPOINT1, ZCL_CLUSTER_HAVC_THERMOSTAT, ZCL_ATTRID_HVAC_THERMOSTAT_MIN_HEAT_SETPOINT_LIMIT, (uint8_t*)&minHeatSet);
-//                                            //zcl_setAttrVal(APP_ENDPOINT1, ZCL_CLUSTER_HAVC_THERMOSTAT, ZCL_ATTRID_HVAC_THERMOSTAT_MAX_HEAT_SETPOINT_LIMIT, (uint8_t*)&maxHeatSet);
-//
-//                                            if (check_answerMcuTimerEvt) {
-//                                                TL_ZB_TIMER_CANCEL(&check_answerMcuTimerEvt);
-//                                            }
-//                                            uart_timeout = TIMEOUT_15SEC;
-//                                            check_answerMcuTimerEvt = TL_ZB_TIMER_SCHEDULE(check_answerMcuCb, NULL, uart_timeout);
-//
-//                                            check_schedule8TimerEvt = TL_ZB_TIMER_SCHEDULE(check_schedule8Cb, NULL, TIMEOUT_650MS);
-//                                            break;
-//                                        case MANUF_NAME_9:
-//                                            if (check_answerMcuTimerEvt) {
-//                                                TL_ZB_TIMER_CANCEL(&check_answerMcuTimerEvt);
-//                                            }
-//                                            uart_timeout = TIMEOUT_2MIN30SEC;
-//                                            check_answerMcuTimerEvt = TL_ZB_TIMER_SCHEDULE(check_answerMcuCb, NULL, uart_timeout);
-//                                            break;
-//                                        default:
-//                                            break;
-//                                    }
-
                                     break;
                                 case COMMAND02:
                                     current_queue->confirm_rec = true;
@@ -788,7 +715,7 @@ void uart_cmd_handler() {
                 if (pkt->command == COMMAND03) {
                     if (pkt->data[0] == 0x01) {
                         /* Reset Factory */
-#if UART_PRINTF_MODE // && DEBUG_CMD
+#if UART_PRINTF_MODE && DEBUG_CMD
                         printf("command 0x03. Factory Reset. net_steer_start: %d\r\n", g_appCtx.net_steer_start);
 #endif
                         if (!g_appCtx.net_steer_start) {
@@ -809,7 +736,7 @@ void uart_cmd_handler() {
                         set_command(pkt->command, pkt->seq_num, false);
 
                     } else {
-#if UART_PRINTF_MODE // && DEBUG_CMD
+#if UART_PRINTF_MODE && DEBUG_CMD
                         printf("command 0x03. Reset ZTU. Not support\r\n");
 #endif
                     }
@@ -1161,7 +1088,7 @@ void uart_cmd_handler() {
                         } else if (data_point->dp_id == data_point_model[DP_IDX_HUMIDITY].id &&
                                    data_point->dp_type == data_point_model[DP_IDX_HUMIDITY].type) {
 
-#if UART_PRINTF_MODE //&& DEBUG_DP
+#if UART_PRINTF_MODE && DEBUG_DP
                             printf("DP Humidity\r\n");
 #endif
                             uint16_t hum = int32_from_str(data_point->data) & 0xffff;
@@ -1172,7 +1099,7 @@ void uart_cmd_handler() {
                         } else if (data_point->dp_id == data_point_model[DP_IDX_HUMIDITY_OFFSET].id &&
                                    data_point->dp_type == data_point_model[DP_IDX_HUMIDITY_OFFSET].type) {
 
-#if UART_PRINTF_MODE //&& DEBUG_DP
+#if UART_PRINTF_MODE && DEBUG_DP
                             printf("DP Humidity offset\r\n");
 #endif
                             uint16_t hum_offset = int32_from_str(data_point->data) & 0xffff;
