@@ -143,36 +143,43 @@ data_point_st_t *init_datapoint_model3() {
     data_point_model_common[DP_IDX_SCHEDULE_MON].id = DP_TYPE3_ID_6E;
     data_point_model_common[DP_IDX_SCHEDULE_MON].type = DP_RAW;
     data_point_model_common[DP_IDX_SCHEDULE_MON].len = 0x11;
+    data_point_model_common[DP_IDX_SCHEDULE_MON].divisor = 10;
     data_point_model_common[DP_IDX_SCHEDULE_MON].local_cmd = local_cmd_set_schedule_3;
 
     data_point_model_common[DP_IDX_SCHEDULE_TUE].id = DP_TYPE3_ID_6D;
     data_point_model_common[DP_IDX_SCHEDULE_TUE].type = DP_RAW;
     data_point_model_common[DP_IDX_SCHEDULE_TUE].len = 0x11;
+    data_point_model_common[DP_IDX_SCHEDULE_TUE].divisor = 10;
     data_point_model_common[DP_IDX_SCHEDULE_TUE].local_cmd = local_cmd_set_schedule_3;
 
     data_point_model_common[DP_IDX_SCHEDULE_WED].id = DP_TYPE3_ID_6C;
     data_point_model_common[DP_IDX_SCHEDULE_WED].type = DP_RAW;
     data_point_model_common[DP_IDX_SCHEDULE_WED].len = 0x11;
+    data_point_model_common[DP_IDX_SCHEDULE_WED].divisor = 10;
     data_point_model_common[DP_IDX_SCHEDULE_WED].local_cmd = local_cmd_set_schedule_3;
 
     data_point_model_common[DP_IDX_SCHEDULE_THU].id = DP_TYPE3_ID_6B;
     data_point_model_common[DP_IDX_SCHEDULE_THU].type = DP_RAW;
     data_point_model_common[DP_IDX_SCHEDULE_THU].len = 0x11;
+    data_point_model_common[DP_IDX_SCHEDULE_THU].divisor = 10;
     data_point_model_common[DP_IDX_SCHEDULE_THU].local_cmd = local_cmd_set_schedule_3;
 
     data_point_model_common[DP_IDX_SCHEDULE_FRI].id = DP_TYPE3_ID_6A;
     data_point_model_common[DP_IDX_SCHEDULE_FRI].type = DP_RAW;
     data_point_model_common[DP_IDX_SCHEDULE_FRI].len = 0x11;
+    data_point_model_common[DP_IDX_SCHEDULE_FRI].divisor = 10;
     data_point_model_common[DP_IDX_SCHEDULE_FRI].local_cmd = local_cmd_set_schedule_3;
 
     data_point_model_common[DP_IDX_SCHEDULE_SAT].id = DP_TYPE3_ID_69;
     data_point_model_common[DP_IDX_SCHEDULE_SAT].type = DP_RAW;
     data_point_model_common[DP_IDX_SCHEDULE_SAT].len = 0x11;
+    data_point_model_common[DP_IDX_SCHEDULE_SAT].divisor = 10;
     data_point_model_common[DP_IDX_SCHEDULE_SAT].local_cmd = local_cmd_set_schedule_3;
 
     data_point_model_common[DP_IDX_SCHEDULE_SUN].id = DP_TYPE3_ID_65;
     data_point_model_common[DP_IDX_SCHEDULE_SUN].type = DP_RAW;
     data_point_model_common[DP_IDX_SCHEDULE_SUN].len = 0x11;
+    data_point_model_common[DP_IDX_SCHEDULE_SUN].divisor = 10;
     data_point_model_common[DP_IDX_SCHEDULE_SUN].local_cmd = local_cmd_set_schedule_3;
 
     data_point_model_common[DP_IDX_LEVEL_A].id = DP_TYPE3_ID_71;
