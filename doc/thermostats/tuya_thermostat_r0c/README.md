@@ -8,7 +8,7 @@
 
 ### Настройки, доступные удаленно.
 
-<img src="https://raw.githubusercontent.com/slacky1965/tuya_thermostat_zrd/refs/heads/main/doc/images/thermostat_r0с_exposes.jpg"/>
+<img src="https://raw.githubusercontent.com/slacky1965/tuya_thermostat_zrd/refs/heads/main/doc/images/thermostat_r0c_exposes.jpg"/>
 
 ### Расписание.
 
