@@ -93,7 +93,7 @@ data_point_st_t *init_datapoint_model7() {
     data_point_model_common[DP_IDX_RUNSTATE].local_cmd = local_cmd_set_run_state_7;
 
     data_point_model_common[DP_IDX_PROG].id = DP_TYPE7_ID_65;
-    data_point_model_common[DP_IDX_PROG].type = DP_ENUM;
+    data_point_model_common[DP_IDX_PROG].type = DP_BOOL;
     data_point_model_common[DP_IDX_PROG].len = 1;
     data_point_model_common[DP_IDX_PROG].divisor = 1;
     data_point_model_common[DP_IDX_PROG].remote_cmd = remote_cmd_oper_mode_7;
