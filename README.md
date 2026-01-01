@@ -297,6 +297,8 @@ Thanks :))))
 - 1.0.20
 	- Added thermostat with signature `_TZE204_szbxmorb`.
 	- Fixed a bug with the schedule divider.
+- 1.0.21
+	- Fixed error of enabling programming mode for Model r07 `_TZE204_mpbki2zm`.
 	
 [Top](#Top)
 
