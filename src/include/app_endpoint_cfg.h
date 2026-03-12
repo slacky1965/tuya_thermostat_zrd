@@ -94,6 +94,7 @@ typedef struct {
     int16_t     maxHeatSetpointLimit;           // max 45°C * 100
     int8_t      localTemperatureCalibration;    // in device -9°C...+9°C
     int16_t     occupiedHeatingSetpoint;        // 0°C ... 50°C * 100
+    int16_t     occupiedCoolingSetpoint;        // 0°C ... 50°C * 100
     uint8_t     controlSequenceOfOperation;     // 0x02 Heating
     uint8_t     systemMode;                     // see /src/zcl/zcl_app_thermostat.h
     uint16_t    runningState;                   // 0x0000 - off, 0x0001 - heat

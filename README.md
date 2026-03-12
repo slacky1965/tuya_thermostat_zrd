@@ -77,6 +77,18 @@ They should point to your telink toolchain executables prefix. For example C:/Te
 
 Next invoke provided in repo win_make.cmd file. It will compile bootloader and next main firmware.
 
+In Linux or in Windows via WSL:
+```
+apt update
+apt install git make python3
+wget https://shyboy.oss-cn-shenzhen.aliyuncs.com/readonly/tc32_gcc_v2.0.tar.bz2
+sudo tar -xvjf tc32_gcc_v2.0.tar.bz2 -C /opt/
+
+make -f makefile.bootloader
+rm -rf out/proj out/platform
+make
+```
+
 ## How to update.
 
 With the release of the new version, `zigbee2mqtt` updating has become much easier.
@@ -136,6 +148,47 @@ In Home Assistant, it looks like this
 <img src="doc/images/HA_1.jpg"/>
 
 <img src="doc/images/HA_2.jpg"/>
+
+## How to update in ZHA
+
+Put 1141-d3a3-1111114b-tuya_thermostat_zrd.zigbee in /config/zigbee_ota on HA filesystem
+
+Edit configuration.yaml adding:
+
+```
+zha:
+  zigpy_config:
+    ota:
+      extra_providers:
+        - type: advanced
+          path: /config/zigbee_ota
+          warning: >-
+            I understand I can *destroy* my devices by enabling OTA updates
+            from files. Some OTA updates can be mistakenly applied to the
+            wrong device, breaking it. I am consciously using this at my
+            own risk.
+# ---------------------------------------------------------------------------
+# Optional: enable debug logging to monitor OTA progress
+# ---------------------------------------------------------------------------
+#logger:
+#  default: info
+#  logs:
+#    homeassistant.components.zha: debug
+#    zigpy: debug
+
+
+```
+Goto Settings -> Devices -> ZHA -> Thermo Device
+On Device Info click 3 dots -> Manage Zigbee Device
+Select OTA cluster (0x0019), select commands -> image notify. Select payload type QueryJitter, put queryjitter parameter > 0 (foe example 100)
+Input Manufacturer code: 4417
+Image Type:  54179
+File Version: 270807041 or which one you have, this parameters can be found running tools/read_ota_header.py with zigbee firmware as parameter
+
+Click send, and on configuration update firmware.
+
+After updating Add new device via Zigbee search and remove old one.
+
 
 ## How to write a new firmware version into an already updated thermostat.
 

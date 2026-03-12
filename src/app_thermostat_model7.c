@@ -29,6 +29,7 @@ data_point_st_t *init_datapoint_model7() {
 
     g_zcl_thermostatAttrs.absMinHeatSetpointLimit = R07_ABS_HEAT_MIN;       // min +5°C
     g_zcl_thermostatAttrs.absMaxHeatSetpointLimit = R07_ABS_HEAT_MAX;       // max +45°C
+    g_zcl_thermostatAttrs.controlSequenceOfOperation = 0x04;                // Cooling and Heating
 
     data_point_model_common[DP_IDX_ONOFF].id = DP_TYPE7_ID_01;
     data_point_model_common[DP_IDX_ONOFF].type = DP_BOOL;

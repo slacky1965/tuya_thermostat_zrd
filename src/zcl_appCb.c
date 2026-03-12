@@ -217,6 +217,12 @@ static void app_zclWriteReqCmd(uint8_t endPoint, uint16_t clusterId, zclWriteCmd
                 uint16_t temp = BUILD_S16(attr[i].attrData[0], attr[i].attrData[1]);
                 if (data_point_model[DP_IDX_SETPOINT].remote_cmd)
                     data_point_model[DP_IDX_SETPOINT].remote_cmd(&temp);
+                g_zcl_thermostatAttrs.occupiedCoolingSetpoint = temp;
+            } else if (attr[i].attrID == ZCL_ATTRID_HVAC_THERMOSTAT_OCCUPIED_COOLING_SETPOINT) {
+                uint16_t temp = BUILD_S16(attr[i].attrData[0], attr[i].attrData[1]);
+                if (data_point_model[DP_IDX_SETPOINT].remote_cmd)
+                    data_point_model[DP_IDX_SETPOINT].remote_cmd(&temp);
+                g_zcl_thermostatAttrs.occupiedHeatingSetpoint = temp;
             } else if(attr[i].attrID == ZCL_ATTRID_HVAC_THERMOSTAT_LOCAL_TEMP_CALIBRATION) {
                 int8_t temp = (int8_t)attr[i].attrData[0];
                 if (data_point_model[DP_IDX_CALIBRATION].remote_cmd)

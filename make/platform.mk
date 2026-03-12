@@ -2,6 +2,7 @@
 OUT_DIR += \
 /platform/chip_8258 \
 /platform/chip_8258/flash \
+/platform/services \
 /platform/services/b85m
  
  
