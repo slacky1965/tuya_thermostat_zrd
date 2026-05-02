@@ -328,6 +328,10 @@ Thanks :))))
 - 1.0.22
 	- The bootloader replacement procedure has been changed. Now, updating from the original firmware to the custom one is a single operation.
 	- Added thermostat with signature `_TZE200_lndsb16m`
+- 1.0.23
+	- Added Moes Star Ring thermostat with signature `_TZE204_lpedvtvr` [#195](https://github.com/slacky1965/tuya_thermostat_zrd/pull/195)
+	- Add coolmode to model 7 [#201](https://github.com/slacky1965/tuya_thermostat_zrd/pull/201)
+	- Added announcement at startup.
 
 [Top](#Top)
 
