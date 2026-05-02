@@ -360,6 +360,41 @@ typedef enum {
     DP_TYPE0C_ID_75    = 0x75,     // protection min temperature 0°C ... +10°C step 1
 } data_point_id_type0C_t;
 
+/* data point for manufacturer id -
+ * "_TZE204_lpedvtvr"
+ *
+ * type0D (modelD)
+*/
+typedef enum {
+    DP_TYPE0D_ID_00     = 0x00,     // not support
+    DP_TYPE0D_ID_01     = 0x01,     // on off
+    DP_TYPE0D_ID_02     = 0x02,     // manual - 0, temporary_manual - 1, programming - 2, eco - 3
+    DP_TYPE0D_ID_10     = 0x10,     // local temperature (0°C ... +90°C step 0.5, *10)
+    DP_TYPE0D_ID_12     = 0x12,     // min heat (+5°C ... +15°C step 1, *10)
+    DP_TYPE0D_ID_1C     = 0x1C,     // factory reset
+    DP_TYPE0D_ID_20     = 0x20,     // sensor IN - 0x00 / AL - 0x01 / OUT - 0x02
+    DP_TYPE0D_ID_22     = 0x22,     // max heat (+35°C ... +45°C step 1, *10)
+    DP_TYPE0D_ID_27     = 0x27,     // keys lock - 1 / unlock  - 0
+    DP_TYPE0D_ID_2F     = 0x2F,     // 0x00 - heat, 0x01 - idle
+    DP_TYPE0D_ID_30     = 0x30,     // screen idle brightness (0% ... 100% step 1, *1)
+    DP_TYPE0D_ID_32     = 0x32,     // heat setpoint (+5°C ... +45°C step 0.5, *10)
+    DP_TYPE0D_ID_65     = 0x65,     // calibration (-10°C ... +10°C step 1, *1)
+    DP_TYPE0D_ID_66     = 0x66,     // schedule ???
+    DP_TYPE0D_ID_67     = 0x67,     // schedule ???
+    DP_TYPE0D_ID_68     = 0x68,     // schedule ???
+    DP_TYPE0D_ID_69     = 0x69,     // schedule ???
+    DP_TYPE0D_ID_6A     = 0x6A,     // schedule ???
+    DP_TYPE0D_ID_6B     = 0x6B,     // schedule ???
+    DP_TYPE0D_ID_6C     = 0x6C,     // schedule ???
+    DP_TYPE0D_ID_6D     = 0x6D,     // temperature of outer sensor (0°C ... +90°C step 0.5, *10)
+    DP_TYPE0D_ID_6E     = 0x6E,     // hysteresis (0.5°C ... 5°C step 0.5, *10)
+    DP_TYPE0D_ID_6F     = 0x6F,     // protection max temperature (+10°C ... +70°C step 1, *10)
+    DP_TYPE0D_ID_70     = 0x70,     // protection min temperature (+0°C ... +10°C step 1, *10)
+    DP_TYPE0D_ID_71     = 0x71,     // eco mode's temperature (+10°C ... +30°C step 1, *10)
+    DP_TYPE0D_ID_72     = 0x72,     // screen off time ["0-10S","20S","30S","40S","50S","60S"]
+    DP_TYPE0D_ID_73     = 0x73,     // light ring
+} data_point_id_type0D_t;
+
 typedef enum {
     SCHEDULE8_MON = 0,
     SCHEDULE8_SAT,
@@ -379,6 +414,7 @@ typedef enum {
     MANUF_NAME_0A,
     MANUF_NAME_0B,
     MANUF_NAME_0C,
+    MANUF_NAME_0D,
     MANUF_NAME_MAX
 } manuf_name_t;
 
@@ -421,7 +457,9 @@ typedef enum {
     DP_IDX_MODE_LOCK,           // 35
     DP_IDX_HUMIDITY,            // 36
     DP_IDX_HUMIDITY_OFFSET,     // 37
-    DP_IDX_MAXNUM               // 38
+    DP_IDX_SCREEN_TIME,         // 38
+    DP_IDX_LED_INDICATOR,       // 39
+    DP_IDX_MAXNUM               // 40
 } data_point_idx_t;
 
 /* Data Point

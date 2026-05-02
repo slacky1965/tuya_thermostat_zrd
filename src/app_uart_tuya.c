@@ -585,6 +585,13 @@ void uart_cmd_handler() {
                                             zb_modelId[18] = '0';
                                             zb_modelId[19] = 'C';
                                             break;
+                                        case MANUF_NAME_0D:
+                                            data_point_model = init_datapoint_model0D();
+                                            uart_timeout = TIMEOUT_20SEC; // TODO:
+                                            set_command(COMMAND28, seq_num, true);
+                                            zb_modelId[18] = '0';
+                                            zb_modelId[19] = 'D';
+                                            break;
                                         default:
                                             manuf_name = MANUF_NAME_1;
                                             strcpy(signature, tuya_manuf_names[0][0]);
@@ -970,6 +977,25 @@ void uart_cmd_handler() {
                             uint8_t mode = data_point->data[0];
                             if (data_point_model[DP_IDX_MODE_LOCK].local_cmd)
                                 data_point_model[DP_IDX_MODE_LOCK].local_cmd(&mode);
+
+                        } else if (data_point->dp_id == data_point_model[DP_IDX_SCREEN_TIME].id &&
+                                   data_point->dp_type == data_point_model[DP_IDX_SCREEN_TIME].type) {
+
+#if UART_PRINTF_MODE && DEBUG_DP
+                            printf("DP ScreenOffTime\r\n");
+#endif
+                            uint8_t time = data_point->data[0];
+                            if (data_point_model[DP_IDX_SCREEN_TIME].local_cmd)
+                                data_point_model[DP_IDX_SCREEN_TIME].local_cmd(&time);
+                        } else if (data_point->dp_id == data_point_model[DP_IDX_LED_INDICATOR].id &&
+                                   data_point->dp_type == data_point_model[DP_IDX_LED_INDICATOR].type) {
+
+#if UART_PRINTF_MODE && DEBUG_DP
+                            printf("DP LedIndicator\r\n");
+#endif
+                            uint8_t mode = data_point->data[0];
+                            if (data_point_model[DP_IDX_LED_INDICATOR].local_cmd)
+                                data_point_model[DP_IDX_LED_INDICATOR].local_cmd(&mode);
 
                         } else if (data_point->dp_id == data_point_model[DP_IDX_SENSOR].id &&
                                    data_point->dp_type == data_point_model[DP_IDX_SENSOR].type) {

@@ -4,7 +4,7 @@
 
 <img src="doc/images/model1.png" alt="image" width="17%" height="auto"> <img src="doc/images/model1_2.png" alt="image" width="14%" height="auto"> <img src="doc/images/model3_1.png" alt="image" width="15%" height="auto"> <img src="doc/images/model3_2.png" alt="image" width="15%" height="auto"> <img src="doc/images/model4.png" alt="image" width="13%" height="auto"> <img src="doc/images/model5.png" alt="image" width="15%" height="auto">
 
-<img src="doc/images/model6.png" alt="image" width="15%" height="auto"> <img src="doc/images/model7.png" alt="image" width="15%" height="auto"> <img src="doc/images/model8.png" alt="image" width="15%" height="auto"> <img src="doc/images/model9.png" alt="image" width="15%" height="auto"> <img src="doc/images/model0b.png" alt="image" width="15%" height="auto">
+<img src="doc/images/model6.png" alt="image" width="15%" height="auto"> <img src="doc/images/model7.png" alt="image" width="15%" height="auto"> <img src="doc/images/model8.png" alt="image" width="15%" height="auto"> <img src="doc/images/model9.png" alt="image" width="15%" height="auto"> <img src="doc/images/model0b.png" alt="image" width="15%" height="auto"> <img src="doc/images/model0d.png" alt="image" width="15%" height="auto">
 
 <!--
 | Custom Zigbee Model | Original Zigbee Manufacturer | Description       |
@@ -27,6 +27,7 @@
 | Tuya_Thermostat_r0A | `_TZE284_xalsoe3m` `_TZE204_xalsoe3m` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0a/README.md) |
 | Tuya_Thermostat_r0B | `_TZE204_8byfmxdv` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0b/README.md) |
 | Tuya_Thermostat_r0C | `_TZE204_szbxmorb` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0c/README.md) |
+| Tuya_Thermostat_r0D | `_TZE204_lpedvtvr` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0d/README.md) |
 
 **Автор не несет никакой ответственности, если вы, воспользовавшись этим проектом, превратите свой умный термостат в полоумный.**
 
@@ -59,6 +60,22 @@
 **Reporting**
 <img src="doc/images/z2m_reporting.jpg"/>
 
+## Как скомпилировать прошивку.
+
+Для успешной сборки проекта под Windows:
+1. TeLink инструменты компиляции (часто это называют Telink IoT Studio)
+2. Git
+3. Python3
+
+**Убедитесь что переменная окружения %PATH% содержит пути до git,make,tc32-elf-* исполняемых файлов и можно их запускать просто указав имя**
+
+Далее, используя ваш любимый текстовой редактор, пропатчите переменную COMPILE_PREFIX в двух файлах makefile и makefile.bootloader 
+Переменная должна указывать на путь полный к каталогу где у вас установлены инструменты Telink для сборки.
+Пример: если вы установили Telink IOT Studio в каталог C:\TelinkIOTStudio то ваша переменная должна иметь значение
+C:/TelinkIoTStudio/opt/tc32/bin/tc32
+Важно в конце сохранять префикс /tc32
+
+Далее, используйте расположенный в репе win_make.cmd файл запустив его. он сначала скомпилирует загрузчик а потом саму прошивку.
 
 ## Как обновить.
 
@@ -259,6 +276,10 @@ P.S. В реальной работе не проверялось, требуе�
 - 1.0.22
 	- Изменена процедура замены `booloader'а`. Теперь обновление с оригинальной прошивки на кастомную происходит за один раз.
 	- Добавлен термостат с сигнатурой `_TZE200_lndsb16m`
-
+- 1.0.23
+	- Добавлен Moes Star Ring термостат с сигнатурой `_TZE204_lpedvtvr` [#195](https://github.com/slacky1965/tuya_thermostat_zrd/pull/195)
+	- Добавлен режим `coolmode` для модели R07 [#201](https://github.com/slacky1965/tuya_thermostat_zrd/pull/201)
+	- Добавлен анонс при старте.
+	
 [Наверх](#Top)
 

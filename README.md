@@ -7,7 +7,7 @@
 
 <img src="doc/images/model1.png" alt="image" width="17%" height="auto"> <img src="doc/images/model1_2.png" alt="image" width="14%" height="auto"> <img src="doc/images/model3_1.png" alt="image" width="15%" height="auto"> <img src="doc/images/model3_2.png" alt="image" width="15%" height="auto"> <img src="doc/images/model4.png" alt="image" width="13%" height="auto"> <img src="doc/images/model5.png" alt="image" width="15%" height="auto">
 
-<img src="doc/images/model6.png" alt="image" width="15%" height="auto"> <img src="doc/images/model7.png" alt="image" width="15%" height="auto"> <img src="doc/images/model8.png" alt="image" width="15%" height="auto"> <img src="doc/images/model9.png" alt="image" width="15%" height="auto"> <img src="doc/images/model0b.png" alt="image" width="15%" height="auto">
+<img src="doc/images/model6.png" alt="image" width="15%" height="auto"> <img src="doc/images/model7.png" alt="image" width="15%" height="auto"> <img src="doc/images/model8.png" alt="image" width="15%" height="auto"> <img src="doc/images/model9.png" alt="image" width="15%" height="auto"> <img src="doc/images/model0b.png" alt="image" width="15%" height="auto"> <img src="doc/images/model0d.png" alt="image" width="15%" height="auto">
 
 <!--
 | Custom Zigbee Model | Original Zigbee Manufacturer | Description       |
@@ -30,6 +30,7 @@
 | Tuya_Thermostat_r0A | `_TZE284_xalsoe3m` `_TZE204_xalsoe3m` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0a/README.md) |
 | Tuya_Thermostat_r0B | `_TZE204_8byfmxdv` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0b/README.md) |
 | Tuya_Thermostat_r0C | `_TZE204_szbxmorb` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0c/README.md) |
+| Tuya_Thermostat_r0D | `_TZE204_lpedvtvr` | [:bookmark_tabs:](doc/thermostats/tuya_thermostat_r0d/README.md) |
 
 **The author assumes no responsibility if you turn your smart thermostat into a half-witted thermostat by using this project.**
 
@@ -47,11 +48,11 @@ Only the thermostats listed above were checked. If you have a different signatur
 
 Only tested in `zigbee2mqtt`. As of the April 2025 version of `zigbee2mqtt`, no external converter is needed. Support is enabled globally.
 
-## Why. 
+## Why.
 
 To keep it from spamming the network. The first instance (see above) sent 25 packets every 8 seconds.
 
-## Result. 
+## Result.
 
 **About**
 <img src="doc/images/z2m_about.jpg"/>
@@ -62,6 +63,31 @@ To keep it from spamming the network. The first instance (see above) sent 25 pac
 **Reporting**
 <img src="doc/images/z2m_reporting.jpg"/>
 
+## How to compile.
+
+To successfuly compile project under Windows you need installed:
+1. TeLink toolchain (sometimes named Telink IoT Studio)
+2. Git
+3. Python3
+
+**Ensure your %PATH% variable contains paths to git,make,tc32-elf-* executables so they can be invoked by executable name only**
+
+Next, open with you favorite text editor makefile and makefile.bootloader and patch variable named COMPILE_PREFIX.
+They should point to your telink toolchain executables prefix. For example C:/TelinkIoTStudio/opt/tc32/bin/tc32 if installed in C:\TelinkIoTStudio
+
+Next invoke provided in repo win_make.cmd file. It will compile bootloader and next main firmware.
+
+In Linux or in Windows via WSL:
+```
+apt update
+apt install git make python3
+wget https://shyboy.oss-cn-shenzhen.aliyuncs.com/readonly/tc32_gcc_v2.0.tar.bz2
+sudo tar -xvjf tc32_gcc_v2.0.tar.bz2 -C /opt/
+
+make -f makefile.bootloader
+rm -rf out/proj out/platform
+make
+```
 
 ## How to update.
 
@@ -123,6 +149,47 @@ In Home Assistant, it looks like this
 
 <img src="doc/images/HA_2.jpg"/>
 
+## How to update in ZHA
+
+Put 1141-d3a3-1111114b-tuya_thermostat_zrd.zigbee in /config/zigbee_ota on HA filesystem
+
+Edit configuration.yaml adding:
+
+```
+zha:
+  zigpy_config:
+    ota:
+      extra_providers:
+        - type: advanced
+          path: /config/zigbee_ota
+          warning: >-
+            I understand I can *destroy* my devices by enabling OTA updates
+            from files. Some OTA updates can be mistakenly applied to the
+            wrong device, breaking it. I am consciously using this at my
+            own risk.
+# ---------------------------------------------------------------------------
+# Optional: enable debug logging to monitor OTA progress
+# ---------------------------------------------------------------------------
+#logger:
+#  default: info
+#  logs:
+#    homeassistant.components.zha: debug
+#    zigpy: debug
+
+
+```
+Goto Settings -> Devices -> ZHA -> Thermo Device
+On Device Info click 3 dots -> Manage Zigbee Device
+Select OTA cluster (0x0019), select commands -> image notify. Select payload type QueryJitter, put queryjitter parameter > 0 (foe example 100)
+Input Manufacturer code: 4417
+Image Type:  54179
+File Version: 270807041 or which one you have, this parameters can be found running tools/read_ota_header.py with zigbee firmware as parameter
+
+Click send, and on configuration update firmware.
+
+After updating Add new device via Zigbee search and remove old one.
+
+
 ## How to write a new firmware version into an already updated thermostat.
 
 All updates will be available via z2m as new releases are released; you don't need to do anything specifically for this.
@@ -177,19 +244,19 @@ Thanks :))))
 - 1.0.02
 	- Release. Removed due to an issue with the OTA update.
 - 1.0.03
-	- Fixed an issue with being able to set the heating temperature above the threshold set in maxHeatSetpoint. 
-	- Corrected the converter for thermostat wiring in Home Assistant. 
-	- Added callback functions of remote commands to DataPoints structure. 
+	- Fixed an issue with being able to set the heating temperature above the threshold set in maxHeatSetpoint.
+	- Corrected the converter for thermostat wiring in Home Assistant.
+	- Added callback functions of remote commands to DataPoints structure.
 	- Tested thermostat with signature `_TZE204_aoclfnxz`. Fixed problem with OTA update.
 - 1.0.03a
 	- PreRelease.
 - 1.0.04
-	- Added a thermostat with the signature `_TZE204_edl8pz1k`. 
+	- Added a thermostat with the signature `_TZE204_edl8pz1k`.
 	- Added callback functions of local commands to DataPoints structure.
 	- Added `watchdog`.
-	- The formation of zb_modelId has been changed. 
+	- The formation of zb_modelId has been changed.
 		> When upgrading to custom firmware, thermostats with different signatures, but which are essentially the same device, will now receive the same group name, regardless of signature.
-	- Changed z2m covetors, now it's just two files. 
+	- Changed z2m covetors, now it's just two files.
 		> One for the thermostat with original firmware, one for the thermostat with custom firmware. There is no need to change anything in them.
 - 1.0.05
 	- Added thermostat with signature `_TZE204_tagezcph`
@@ -261,7 +328,11 @@ Thanks :))))
 - 1.0.22
 	- The bootloader replacement procedure has been changed. Now, updating from the original firmware to the custom one is a single operation.
 	- Added thermostat with signature `_TZE200_lndsb16m`
-	
+- 1.0.23
+	- Added Moes Star Ring thermostat with signature `_TZE204_lpedvtvr` [#195](https://github.com/slacky1965/tuya_thermostat_zrd/pull/195)
+	- Add coolmode to model 7 [#201](https://github.com/slacky1965/tuya_thermostat_zrd/pull/201)
+	- Added announcement at startup.
+
 [Top](#Top)
 
 

@@ -295,6 +295,7 @@ zcl_thermostatAttr_t g_zcl_thermostatAttrs = {
     .maxHeatSetpointLimit = 4500,           // max 45°C * 100 (+15°C ... +45°C)
     .localTemperatureCalibration = 0,       // in device -9°C...+9°C
     .occupiedHeatingSetpoint = 2200,        // set 22°C * 100
+    .occupiedCoolingSetpoint = 2200,        // set 22°C * 100
     .controlSequenceOfOperation = 0x02,     // 0x02 Heating
     .systemMode = SYS_MODE_OFF,             // see /src/zcl/zcl_app_thermostat.h
     .runningState = 0x0000,                 // 0x0000 - off, 0x0001 - heat
@@ -331,6 +332,7 @@ const zclAttrInfo_t thermostat_attrTbl[] = {
         { ZCL_ATTRID_HVAC_THERMOSTAT_MAX_HEAT_SETPOINT_LIMIT,       ZCL_INT16,      RWR,    (uint8_t*)&g_zcl_thermostatAttrs.maxHeatSetpointLimit       },
         { ZCL_ATTRID_HVAC_THERMOSTAT_LOCAL_TEMP_CALIBRATION,        ZCL_INT8,       RWR,    (uint8_t*)&g_zcl_thermostatAttrs.localTemperatureCalibration},
         { ZCL_ATTRID_HVAC_THERMOSTAT_OCCUPIED_HEATING_SETPOINT,     ZCL_INT16,      RWR,    (uint8_t*)&g_zcl_thermostatAttrs.occupiedHeatingSetpoint    },
+        { ZCL_ATTRID_HVAC_THERMOSTAT_OCCUPIED_COOLING_SETPOINT,     ZCL_INT16,      RWR,    (uint8_t*)&g_zcl_thermostatAttrs.occupiedCoolingSetpoint    },
         { ZCL_ATTRID_HVAC_THERMOSTAT_CTRL_SEQUENCE_OF_OPERATION,    ZCL_ENUM8,      R,      (uint8_t*)&g_zcl_thermostatAttrs.controlSequenceOfOperation },
         { ZCL_ATTRID_HVAC_THERMOSTAT_SYS_MODE,                      ZCL_ENUM8,      RWR,    (uint8_t*)&g_zcl_thermostatAttrs.systemMode                 },
         { ZCL_ATTRID_HVAC_THERMOSTAT_PROGRAMMING_OPERATION_MODE,    ZCL_BITMAP8,    RWR,    (uint8_t*)&g_zcl_thermostatAttrs.manual_progMode            },
@@ -354,6 +356,8 @@ const zclAttrInfo_t thermostat_attrTbl[] = {
         { ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_EXT_TEMP_CALIBRATION,   ZCL_INT8,       RWR,    (uint8_t*)&g_zcl_thermostatAttrs.extTemperatureCalibration  },
         { ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_MODE_KEYLOCK,           ZCL_BOOLEAN,    RWR,    (uint8_t*)&g_zcl_thermostatAttrs.modeKeyLock                },
         { ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_MANUF_NAME,             ZCL_ENUM8,      RW,     (uint8_t*)&g_zcl_thermostatAttrs.manuf_name                 },
+        { ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_SCREEN_OFF_TIME,        ZCL_ENUM8,      RW,     (uint8_t*)&g_zcl_thermostatAttrs.screen_off_time            },
+        { ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_LED_INDICATOR,          ZCL_BOOLEAN,    RW,     (uint8_t*)&g_zcl_thermostatAttrs.led_indicator              },
 
         { ZCL_ATTRID_GLOBAL_CLUSTER_REVISION,                       ZCL_UINT16,     R,      (uint8_t*)&zcl_attr_global_clusterRevision                  },
 };
@@ -502,6 +506,7 @@ static void print_setting_sr(nv_sts_t st, thermostat_settings_t *thermostat_sett
             case MANUF_NAME_7:
             case MANUF_NAME_9:
             case MANUF_NAME_0C:
+            case MANUF_NAME_0D:
                 for(i = 0; i < 4; i++) {
                     printf("schedule_mon[%d]. transTime: 0x%x, heatSetpoint: 0x%x\r\n", i,
                             thermostat_settings->schedule_data.schedule_mon[i].transTime,
@@ -861,6 +866,7 @@ nv_sts_t thermostat_settings_restore() {
         g_zcl_thermostatAttrs.maxHeatSetpointLimit = thermostat_settings.maxHeatSetpointLimit;
         g_zcl_thermostatAttrs.localTemperatureCalibration = thermostat_settings.localTemperatureCalibration;
         g_zcl_thermostatAttrs.occupiedHeatingSetpoint = thermostat_settings.occupiedHeatingSetpoint;
+        g_zcl_thermostatAttrs.occupiedCoolingSetpoint = thermostat_settings.occupiedHeatingSetpoint;
         g_zcl_thermostatAttrs.manual_progMode = thermostat_settings.manual_progMode;
         g_zcl_thermostatAttrs.sensor_used = thermostat_settings.sensor_used;
         g_zcl_thermostatAttrs.frostProtect = thermostat_settings.frostProtect;

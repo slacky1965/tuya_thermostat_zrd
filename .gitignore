@@ -1,4 +1,5 @@
 out/
 doc_local/
 bin/_thermostat_orig.bin
-
+.vscode/
+compile_commands.json

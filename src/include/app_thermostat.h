@@ -155,6 +155,7 @@ data_point_st_t *init_datapoint_model9();
 data_point_st_t *init_datapoint_model0A();
 data_point_st_t *init_datapoint_model0B();
 data_point_st_t *init_datapoint_model0C();
+data_point_st_t *init_datapoint_model0D();
 
 void remote_cmd_sys_mode(void *args);
 void remote_cmd_heating_set(void *args);
@@ -447,6 +448,31 @@ void remote_cmd_set_schedule_0B(void *args);
 void remote_cmd_humidity_0C(void *args);
 void remote_cmd_humidity_offset_0C(void *args);
 
+/*
+ *  remote_cmd for signarure
+ *  "lpedvtvr"
+ *
+ *  model0D - name_0D
+ */
+#define remote_cmd_sys_mode_0D          remote_cmd_sys_mode
+#define remote_cmd_heating_set_0D       remote_cmd_heating_set
+#define remote_cmd_temp_calibration_0D  remote_cmd_temp_calibration
+#define remote_cmd_sensor_used_0D       remote_cmd_sensor_used
+#define remote_cmd_keylock_0D           remote_cmd_keylock
+#define remote_cmd_deadband_0D          remote_cmd_deadband_6
+#define remote_cmd_min_setpoint_0D      remote_cmd_min_setpoint
+#define remote_cmd_max_setpoint_0D      remote_cmd_max_setpoint
+#define remote_cmd_frost_protect_0D     remote_cmd_frost_protect_2
+#define remote_cmd_heat_protect_0D      remote_cmd_heat_protect_2
+#define remote_cmd_set_schedule_0D      remote_cmd_set_schedule_2
+#define remote_cmd_get_schedule_0D      remote_cmd_get_schedule_2
+#define remote_cmd_eco_mode_temp_0D     remote_cmd_eco_mode_cool_temp_7
+#define remote_cmd_setting_reset_0D     remote_cmd_setting_reset_6
+
+void remote_cmd_oper_mode_0D(void *args);
+void remote_cmd_level_0D(void *args);
+void remote_cmd_screen_off_time_0D(void* args);
+void remote_cmd_led_indicator_0D(void* args);
 
 /*
  * common functions local_cmd
@@ -762,6 +788,35 @@ void local_cmd_set_schedule_0B(void *args);
 
 void local_cmd_humidity_0C(void *args);
 void local_cmd_humidity_offset_0C(void *args);
+
+/*
+ *  local_cmd for signarure
+ *  "lpedvtvr"
+ *
+ *  model0D - name_0D
+ */
+#define local_cmd_inner_sensor_0D       local_cmd_inner_sensor
+#define local_cmd_heating_set_0D        local_cmd_heating_set
+#define local_cmd_temp_calibration_0D   local_cmd_temp_calibration
+#define local_cmd_min_setpoint_0D       local_cmd_min_setpoint
+#define local_cmd_max_setpoint_0D       local_cmd_max_setpoint
+#define local_cmd_deadband_0D           local_cmd_deadband
+#define local_cmd_keylock_0D            local_cmd_keylock
+#define local_cmd_sensor_used_0D        local_cmd_sensor_used
+#define local_cmd_set_run_state_0D      local_cmd_set_run_state
+#define local_cmd_onoff_state_0D        local_cmd_onoff_state
+#define local_cmd_frost_protect_0D      local_cmd_frost_protect_2
+#define local_cmd_heat_protect_0D       local_cmd_heat_protect_2
+#define local_cmd_outdoor_sensor_0D     local_cmd_outdoor_sensor_2
+#define local_cmd_set_schedule_0D       local_cmd_set_schedule_2
+#define local_cmd_eco_mode_0D           local_cmd_eco_mode_3
+#define local_cmd_eco_mode_temp_0D      local_cmd_eco_mode_cool_temp_7
+#define local_cmd_setting_reset_0D      local_cmd_setting_reset_6
+
+void local_cmd_oper_mode_0D(void* args);
+void local_cmd_level_0D(void* args);
+void local_cmd_screen_off_time_0D(void* args);
+void local_cmd_led_indicator_0D(void* args);
 
 
 #endif /* SRC_INCLUDE_APP_THERMOSTAT_H_ */

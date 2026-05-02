@@ -58,6 +58,7 @@ void (*answer_weekly_schedule[MANUF_NAME_MAX])(void *args) = {
    remote_cmd_get_schedule_0A,
    remote_cmd_get_schedule_0B,
    remote_cmd_get_schedule_0C,
+   remote_cmd_get_schedule_0D,
 };
 
 /*
@@ -556,6 +557,7 @@ void local_cmd_heating_set(void *args) {
     *temp *= divisor;
 
     zcl_setAttrVal(APP_ENDPOINT1, ZCL_CLUSTER_HAVC_THERMOSTAT, ZCL_ATTRID_HVAC_THERMOSTAT_OCCUPIED_HEATING_SETPOINT, (uint8_t*)temp);
+    zcl_setAttrVal(APP_ENDPOINT1, ZCL_CLUSTER_HAVC_THERMOSTAT, ZCL_ATTRID_HVAC_THERMOSTAT_OCCUPIED_COOLING_SETPOINT, (uint8_t*)temp);
 
     thermostat_settings_save();
 }

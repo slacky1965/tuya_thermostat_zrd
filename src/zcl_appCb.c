@@ -217,6 +217,12 @@ static void app_zclWriteReqCmd(uint8_t endPoint, uint16_t clusterId, zclWriteCmd
                 uint16_t temp = BUILD_S16(attr[i].attrData[0], attr[i].attrData[1]);
                 if (data_point_model[DP_IDX_SETPOINT].remote_cmd)
                     data_point_model[DP_IDX_SETPOINT].remote_cmd(&temp);
+                g_zcl_thermostatAttrs.occupiedCoolingSetpoint = temp;
+            } else if (attr[i].attrID == ZCL_ATTRID_HVAC_THERMOSTAT_OCCUPIED_COOLING_SETPOINT) {
+                uint16_t temp = BUILD_S16(attr[i].attrData[0], attr[i].attrData[1]);
+                if (data_point_model[DP_IDX_SETPOINT].remote_cmd)
+                    data_point_model[DP_IDX_SETPOINT].remote_cmd(&temp);
+                g_zcl_thermostatAttrs.occupiedHeatingSetpoint = temp;
             } else if(attr[i].attrID == ZCL_ATTRID_HVAC_THERMOSTAT_LOCAL_TEMP_CALIBRATION) {
                 int8_t temp = (int8_t)attr[i].attrData[0];
                 if (data_point_model[DP_IDX_CALIBRATION].remote_cmd)
@@ -293,6 +299,14 @@ static void app_zclWriteReqCmd(uint8_t endPoint, uint16_t clusterId, zclWriteCmd
                 uint8_t mode = attr[i].attrData[0];
                 if (data_point_model[DP_IDX_MODE_LOCK].remote_cmd)
                     data_point_model[DP_IDX_MODE_LOCK].remote_cmd(&mode);
+            } else if(attr[i].attrID == ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_SCREEN_OFF_TIME) {
+                uint8_t mode = attr[i].attrData[0];
+                if (data_point_model[DP_IDX_SCREEN_TIME].remote_cmd)
+                    data_point_model[DP_IDX_SCREEN_TIME].remote_cmd(&mode);
+            } else if(attr[i].attrID == ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_LED_INDICATOR) {
+                uint8_t mode = attr[i].attrData[0];
+                if (data_point_model[DP_IDX_LED_INDICATOR].remote_cmd)
+                    data_point_model[DP_IDX_LED_INDICATOR].remote_cmd(&mode);
             } else if(attr[i].attrID == ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_MANUF_NAME) {
                 uint8_t m_name = attr[i].attrData[0];
                 printf("Manual set namufacturer name: %d\r\n", m_name);
@@ -1221,6 +1235,7 @@ status_t app_thermostatCb(zclIncomingAddrInfo_t *pAddrInfo, uint8_t cmdId, void 
                     case MANUF_NAME_7:
                     case MANUF_NAME_9:
                     case MANUF_NAME_0C:
+                    case MANUF_NAME_0D:
                         for (uint8_t i = 0; i < cmd->numOfTransForSequence; i++) {
                             if (i == 4) {
                                 break;
