@@ -418,15 +418,16 @@ void remote_cmd_sensor_used_6(void *args) {
         return;
     }
 
-    if (*sensor_used == SENSOR_AL) {
-        *sensor_used = SENSOR_OU;
-    } else if (*sensor_used == SENSOR_OU) {
-        *sensor_used = SENSOR_AL;
+    /* args points directly at ZCL attribute RAM. Swap into a local so we don't
+     * corrupt the ZCL view of the attribute with the MCU-side encoding. */
+    uint8_t mcu_sensor = *sensor_used;
+    if (mcu_sensor == SENSOR_AL) {
+        mcu_sensor = SENSOR_OU;
+    } else if (mcu_sensor == SENSOR_OU) {
+        mcu_sensor = SENSOR_AL;
     }
 
-//    printf("sensor_used: %d\r\n", *sensor_used);
-
-    zcl_setAttrVal(APP_ENDPOINT1, ZCL_CLUSTER_HAVC_THERMOSTAT, ZCL_ATTRID_HVAC_THERMOSTAT_CUSTOM_SENSOR_USED, (uint8_t*)sensor_used);
+//    printf("sensor_used: %d\r\n", mcu_sensor);
 
     pkt_tuya_t *out_pkt = (pkt_tuya_t*)remote_cmd_pkt_buff;
     uint16_t seq_num = get_seq_num();
@@ -446,7 +447,7 @@ void remote_cmd_sensor_used_6(void *args) {
     data_point->dp_len = (reverse16(1));
     out_pkt->pkt_len++;
     out_pkt->pkt_len++;
-    data_point->data[0] = *sensor_used;
+    data_point->data[0] = mcu_sensor;
     out_pkt->pkt_len ++;
     data_point->data[1] = checksum((uint8_t*)out_pkt, out_pkt->pkt_len++);
     add_to_ring_cmd(out_pkt, true);
