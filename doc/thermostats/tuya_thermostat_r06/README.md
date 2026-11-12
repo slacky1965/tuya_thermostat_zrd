@@ -4,8 +4,9 @@
 	"_TZE204_oh8y8pv8"
 	"_TZE204_gops3slb"
 	"_TZE284_cvub6xbb"
+	"_TZE28C1000000_aaeaifez"
 	
-### Производитель Avatto (ZWT10016A)
+### Производитель Avatto (ZWT10016A, ZWT100-WH-3A - `_TZE28C1000000_aaeaifez`)
 	
 ### Внешний вид.
 

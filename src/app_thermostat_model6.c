@@ -2,6 +2,7 @@
 
 /* data point for manufacturer id -
  * "lzriup1j"
+ * "aaeaifez" (Avatto ZWT100-WH-3A)
  *
  * id, type, len, divisor, remote_commands_functionCb, local_commands_functionCb
  */
@@ -586,6 +587,8 @@ void remote_cmd_max_setpoint_6(void *args) {
     pkt_tuya_t *out_pkt = (pkt_tuya_t*)remote_cmd_pkt_buff;
     uint16_t seq_num = get_seq_num();
     seq_num++;
+
+    max_temp /= 100; // 6000 -> 60°C
 
     if (data_point_model[DP_IDX_MAX].divisor == 10) {
         max_temp *= 10;
