@@ -12,6 +12,7 @@ const definition = {
                   {manufacturerName: '_TZE204_oh8y8pv8'},
                   {manufacturerName: '_TZE204_gops3slb'},
                   {manufacturerName: '_TZE284_cvub6xbb'},
+                  {manufacturerName: '_TZE28C1000000_aaeaifez'},
                   {manufacturerName: '_TZE204_mpbki2zm'},
                   {manufacturerName: '_TZE200_7rghpoxo'},
                   {manufacturerName: '_TZE204_7rghpoxo'},

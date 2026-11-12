@@ -419,7 +419,8 @@ void uart_cmd_handler() {
                                 data_point->dp_id == data_point_model[DP_IDX_FAN_CONTROL].id ||
                                 data_point->dp_id == data_point_model[DP_IDX_SCHEDULE].id) {
                                 if (strcmp(tuya_manuf_names[MANUF_NAME_6][1], signature) == 0 ||
-                                        strcmp(tuya_manuf_names[MANUF_NAME_6][3], signature) == 0) {
+                                        strcmp(tuya_manuf_names[MANUF_NAME_6][3], signature) == 0 ||
+                                        strcmp(tuya_manuf_names[MANUF_NAME_6][4], signature) == 0) {
                                     set_default_answer(COMMAND05, reverse16(pkt->seq_num));
                                 } else {
                                     set_default_answer(COMMAND06, reverse16(pkt->seq_num));

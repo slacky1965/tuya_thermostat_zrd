@@ -157,6 +157,7 @@ typedef data_point_id_type2_t data_point_id_type5_t;
  * "oh8y8pv8",
  * "gops3slb",
  * "cvub6xbb",
+ * "aaeaifez",
  *
  * type6 (model6)
 */
